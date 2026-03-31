@@ -703,8 +703,11 @@ function xows_gui_call_self_hangup(peer, reason)
  */
 function xows_gui_call_onoffer(peer, stream)
 {
-  // Add remote participant to Call View
-  xows_gui_call_view_part_add(peer, peer, stream);
+  // Add remote participant to Call View (if stream is available;
+  // for JMI propose, stream is null until session-initiate arrives)
+  if(stream) {
+    xows_gui_call_view_part_add(peer, peer, stream);
+  }
 
   // If peer is offscreen during incomming call, add notification
   if(peer !== xows_gui_peer)
