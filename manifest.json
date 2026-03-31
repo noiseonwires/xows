@@ -1,0 +1,22 @@
+{
+  "name": "Xows XMPP Client",
+  "short_name": "Xows",
+  "description": "XMPP Over WebSocket - Web Chat Client",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#1a1a2e",
+  "theme_color": "#e6a817",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
