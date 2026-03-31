@@ -272,7 +272,14 @@ function xows_wrtc_new(icelist, onsdesc, ontrack, onstate, onerror, param)
   const iceservers = [];
 
   for(let i = 0; i < icelist.length; ++i) {
-    const ice = {urls:icelist[i].type+":"+icelist[i].host+":"+icelist[i].port};
+
+    // Build proper ICE server URL
+    // Format: type:host[:port][?transport=udp|tcp]
+    let url = icelist[i].type+":"+icelist[i].host;
+    if(icelist[i].port) url += ":"+icelist[i].port;
+    if(icelist[i].transport) url += "?transport="+icelist[i].transport;
+
+    const ice = {urls:url};
     xows_log(2,"xows_wrtc_new","using ICE",ice.urls);
     // Check whether we need to generate credentials
     if(icelist[i].secret) {
