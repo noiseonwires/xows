@@ -1,0 +1,92 @@
+<div hidden id="scr_main" XOWS_TPL_IMPORT>
+  <!-- main interface frame, defined in scr_main.html -->
+</div>
+
+<div hidden id="scr_page">
+  <page-wrap>
+    <col-padd></col-padd>
+    <!-- Middle Collumn -->
+    <col-page>
+      <div class="SCROLLABLE">
+        <!-- Important : Page Auth must be the first the browser read to properly pre-fill login/pass -->
+        <page-inner hidden id="page_auth" title="${'Login'}" XOWS_TPL_IMPORT></page-inner>
+        <page-inner hidden id="page_mucc" title="${'Channel configuration'}" XOWS_TPL_IMPORT></page-inner>
+        <page-inner hidden id="page_muca" title="${'Channel administration'}" XOWS_TPL_IMPORT></page-inner>
+        <page-inner hidden id="page_user" title="${'User profile'}" XOWS_TPL_IMPORT></page-inner>
+        <page-inner hidden id="page_regi" title="${'Register'}" XOWS_TPL_IMPORT></page-inner>
+        <page-inner hidden id="page_acct" title="${'Account options'}" XOWS_TPL_IMPORT></page-inner>
+        <page-inner hidden id="page_wait" title="${'Connecting'}" XOWS_TPL_IMPORT></page-inner>
+      </div>
+    </col-page>
+    <!-- Right Collumn -->
+    <col-exit hidden id="colr_exit">
+      <btn-close id="page_exit"></btn-close>
+    </col-exit>
+    <col-padd></col-padd>
+  </page-wrap>
+</div>
+
+<!-- Frame to capture mouse click outside menus or dialogs -->
+<div hidden id="scr_void"></div>
+
+<div hidden id="drop_emoj" XOWS_TPL_IMPORT>
+  <!-- Emoji menu -->
+</div>
+
+<menu-drop hidden id="drop_occu" XOWS_TPL_IMPORT>
+  <!-- Channel Occupant contextual menu -->
+</menu-drop>
+
+<menu-drop hidden id="drop_room" XOWS_TPL_IMPORT>
+  <!-- Channel Options/Actions menu -->
+</menu-drop>
+
+<dialog hidden id="over_prof" XOWS_TPL_IMPORT>
+  <!-- Special Contact/Occupant Profile popup -->
+</dialog>
+
+<!-- Image view frame -->
+<div hidden id="over_view">
+  <div id="view_wrap">
+    <button id="view_optab" title="${'Open in new tab'}"></button>
+    <img id="view_img" src="">
+    <button id="view_close"></button>
+  </div>
+</div>
+
+<!-- Generic Message Dialog-Box -->
+<dialog hidden class="over-dbox" id="over_mbox">
+  <dbox-head id="mbox_head"></dbox-head>
+  <btn-close class="dbox-close" id="mbox_close"></btn-close>
+  <dbox-body>
+    <dbox-icon id="mbox_icon"></dbox-icon>
+    <p id="mbox_text"></p>
+  </dbox-body>
+  <dbox-acts>
+    <button id="mbox_valid" class="btn-valid">${'OK'}</button>
+    <button hidden id="mbox_abort" class="btn-abort">${'Cancel'}</button>
+  </dbox-acts>
+</dialog>
+
+<!-- Generic Input Dialog-Box -->
+<dialog hidden class="over-dbox" id="over_ibox">
+  <dbox-head id="ibox_head"></dbox-head>
+  <btn-close class="dbox-close" id="ibox_close"></btn-close>
+  <input id="ibox_input" type="text"></input>
+  <span id="ibox_error"></span>
+  <p id="ibox_hint"></p>
+  <dbox-acts>
+    <button id="ibox_valid" class="btn-valid">${'Apply'}</button>
+    <button id="ibox_abort" class="btn-abort">${'Cancel'}</button>
+  </dbox-acts>
+</dialog>
+
+<!-- Generic Popup Dialog-Box -->
+<dialog hidden id="over_popu">
+  <popu-text id="popu_text"></popu-text>
+  <popu-acts>
+    <button id="popu_abort" class="btn-abort"></button>
+    <button id="popu_valid" class="btn-valid"></button>
+    <btn-close id="popu_close"></btn-close>
+  </popu-acts>
+</dialog>
