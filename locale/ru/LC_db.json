@@ -1,0 +1,907 @@
+{
+  "unsername already exists":
+  "это имя пользователя уже существует",
+
+  "username contains illegal characters":
+  "имя пользователя содержит недопустимые символы",
+
+  "unable to register":
+  "не удалось зарегистрироваться",
+
+  "invalid username (JID domain missing)":
+  "недопустимое имя пользователя (отсутствует домен JID)",
+
+  "invalid server framing":
+  "недопустимый формат кадрирования сервера",
+
+  "the server closed the stream":
+  "сервер закрыл поток",
+
+  "the server reported stream error":
+  "сервер сообщил об ошибке потока",
+
+  "account registration is not allowed by the server":
+  "регистрация аккаунта не разрешена сервером",
+
+  "unable to find a suitable authentication mechanism":
+  "не удалось найти подходящий механизм аутентификации",
+
+  "Server does not provide required stream features":
+  "Сервер не предоставляет необходимые функции потока",
+
+  "wrong username or password":
+  "неверное имя пользователя или пароль",
+
+  "authentication error":
+  "ошибка аутентификации",
+
+  "server integrity check failed":
+  "ошибка проверки целостности сервера",
+
+  "bind resource error":
+  "ошибка привязки ресурса",
+
+  "session establishment failure":
+  "ошибка установления сессии",
+
+  "unable to connect to remote server":
+  "не удалось подключиться к удалённому серверу",
+
+  "Connection lost (recovery failed)":
+  "Соединение потеряно (восстановление не удалось)",
+
+  "Network error":
+  "Ошибка сети",
+
+  "Authentication failure":
+  "Ошибка аутентификации",
+
+  "Registration failure":
+  "Ошибка регистрации",
+
+  "Connection failure":
+  "Ошибка подключения",
+
+  "Login":
+  "Вход",
+
+  "Please enter your username and password":
+  "Введите имя пользователя и пароль",
+
+  "Login automatically":
+  "Входить автоматически",
+
+  "Username":
+  "Имя пользователя",
+
+  "Password":
+  "Пароль",
+
+  "Connect":
+  "Подключиться",
+
+  "Register a new account":
+  "Зарегистрировать новый аккаунт",
+
+  "Account creation":
+  "Создание аккаунта",
+
+  "Please enter new account username and password":
+  "Введите имя пользователя и пароль для нового аккаунта",
+
+  "I am not a robot":
+  "Я не робот",
+
+  "Register":
+  "Зарегистрироваться",
+
+  "Username contains illegal character: '\"&;<>/:@":
+  "Имя пользователя содержит недопустимые символы: '\"&;<>/:@",
+
+  "Login with an existing account":
+  "Войти с существующим аккаунтом",
+
+  "It remains unsaved changes":
+  "Остались несохранённые изменения",
+
+  "Save changes":
+  "Сохранить изменения",
+
+  "Reset":
+  "Сбросить",
+
+  "Loading...":
+  "Загрузка...",
+
+  "Connecting...":
+  "Подключение...",
+
+  "Please wait...":
+  "Пожалуйста, подождите...",
+
+  "Contacts":
+  "Контакты",
+
+  "Subscribes to contact":
+  "Подписка на контакт",
+
+  "Authorized":
+  "Авторизован",
+
+  "Resend authorization request":
+  "Повторно отправить запрос авторизации",
+
+  "Remove contact":
+  "Удалить контакт",
+
+  "Waiting for authorization":
+  "Ожидание авторизации",
+
+  "Authorization pending":
+  "Авторизация ожидается",
+
+  "Remote server not found":
+  "Удалённый сервер не найден",
+
+  "Server error":
+  "Ошибка сервера",
+
+  "Remove bookmark":
+  "Удалить закладку",
+
+  "Channels":
+  "Каналы",
+
+  "Join or create a Channel":
+  "Присоединиться или создать канал",
+
+  "Query public Channels list":
+  "Запросить список публичных каналов",
+
+  "Bookmarks":
+  "Закладки",
+
+  "Public Channels":
+  "Публичные каналы",
+
+  "Private Channels":
+  "Приватные каналы",
+
+  "Private messages":
+  "Личные сообщения",
+
+  "Room occupant":
+  "Участник комнаты",
+
+  "Edit user profile":
+  "Редактировать профиль",
+
+  "Status message":
+  "Статусное сообщение",
+
+  "Define a status message...":
+  "Задать статусное сообщение...",
+
+  "Edit status message":
+  "Изменить статусное сообщение",
+
+  "Indicate anything you want to mention about your current situation.":
+  "Укажите всё, что хотите сообщить о вашем текущем состоянии.",
+
+  "Enter a status message...":
+  "Введите статусное сообщение...",
+
+  "Available For Chat":
+  "Доступен для чата",
+
+  "Available":
+  "Доступен",
+
+  "Away":
+  "Отошёл",
+
+  "Extended Away":
+  "Отсутствует",
+
+  "Do Not Disturb":
+  "Не беспокоить",
+
+  "Disconnect":
+  "Отключиться",
+
+  "Set topic of":
+  "Задать тему для",
+
+  "Enter a topic...":
+  "Введите тему...",
+
+  "Set the message of the day, a welcome message or the discussion subject.":
+  "Задайте сообщение дня, приветственное сообщение или тему обсуждения.",
+
+  "Nickname for":
+  "Никнейм для",
+
+  "Specify your new nickname for this Channel.":
+  "Укажите ваш новый никнейм для этого канала.",
+
+  "Enter a nickname...":
+  "Введите никнейм...",
+
+  "Video call":
+  "Видеозвонок",
+
+  "Audio call":
+  "Аудиозвонок",
+
+  "Information":
+  "Информация",
+
+  "Add to Bookmarks":
+  "Добавить в закладки",
+
+  "Remove from Bookmarks":
+  "Удалить из закладок",
+
+  "Register to Channel":
+  "Зарегистрироваться в канале",
+
+  "Unregister from Channel":
+  "Отменить регистрацию в канале",
+
+  "Leave the Channel":
+  "Покинуть канал",
+
+  "Change nickname":
+  "Изменить никнейм",
+
+  "Edit Channel topic":
+  "Изменить тему канала",
+
+  "Enable notifications":
+  "Включить уведомления",
+
+  "Disable notifications":
+  "Отключить уведомления",
+
+  "Channel occupants list":
+  "Список участников канала",
+
+  "Back to recent messages":
+  "Вернуться к последним сообщениям",
+
+  "New unread messages":
+  "Новые непрочитанные сообщения",
+
+  "New incomming call":
+  "Новый входящий звонок",
+
+  "Upload a file":
+  "Загрузить файл",
+
+  "Send a message ...":
+  "Написать сообщение ...",
+
+  "Insert an emoji":
+  "Вставить эмодзи",
+
+  "Profil":
+  "Профиль",
+
+  "Send a message":
+  "Отправить сообщение",
+
+  "Contact profile":
+  "Профиль контакта",
+
+  "Subscribe":
+  "Подписаться",
+
+  "Pending...":
+  "Ожидание...",
+
+  "This user have no status message":
+  "У этого пользователя нет статусного сообщения",
+
+  "Contact subscription":
+  "Подписка на контакт",
+
+  "Mutual":
+  "Взаимная",
+
+  "Pending":
+  "Ожидается",
+
+  "Unavailable":
+  "Недоступен",
+
+  "Affiliation to Channel":
+  "Принадлежность к каналу",
+
+  "Role in Channel":
+  "Роль в канале",
+
+  "Occupant options":
+  "Параметры участника",
+
+  "Affiliation":
+  "Принадлежность",
+
+  "Owner":
+  "Владелец",
+
+  "Administrator":
+  "Администратор",
+
+  "Member":
+  "Участник",
+
+  "Unaffiliated":
+  "Без принадлежности",
+
+  "Role":
+  "Роль",
+
+  "Moderator":
+  "Модератор",
+
+  "Participant":
+  "Участник",
+
+  "Visitor":
+  "Посетитель",
+
+  "Kick":
+  "Выгнать",
+
+  "Ban":
+  "Заблокировать",
+
+  "Occupants":
+  "Участники",
+
+  "Change occupant role":
+  "Изменить роль участника",
+
+  "Assign the Channel role":
+  "Назначить роль в канале",
+
+  "Kick occupant":
+  "Выгнать участника",
+
+  "Change occupant affiliation":
+  "Изменить принадлежность участника",
+
+  "Grant Channel affiliation":
+  "Предоставить принадлежность к каналу",
+
+  "Ban occupant":
+  "Заблокировать участника",
+
+  "to occupant":
+  "участнику",
+
+  "Add this Contact":
+  "Добавить контакт",
+
+  "Enter Channel name or address...":
+  "Введите название или адрес канала...",
+
+  "If the specified Channel does not exist and if server does not restrict Channel creation, a new Channel will be created with you as owner.":
+  "Если указанный канал не существует и сервер не ограничивает создание каналов, будет создан новый канал, владельцем которого будете вы.",
+
+  "Join":
+  "Присоединиться",
+
+  "Channel ID contains illegal character: '\"&;<>/:@":
+  "Идентификатор канала содержит недопустимые символы: '\"&;<>/:@",
+
+  "Channel initialization":
+  "Инициализация канала",
+
+  "You just created a new Channel, would you want to configure it right now ?":
+  "Вы только что создали новый канал, хотите настроить его прямо сейчас?",
+
+  "Ignore":
+  "Игнорировать",
+
+  "Configure":
+  "Настроить",
+
+  "Channel access":
+  "Доступ к каналу",
+
+  "Channel creation":
+  "Создание канала",
+
+  "Channel join error":
+  "Ошибка присоединения к каналу",
+
+  "Channel unvailable":
+  "Канал недоступен",
+
+  "This Channel has been destroyed and is no longer available":
+  "Этот канал был удалён и больше не доступен",
+
+  "Unspecified reason":
+  "Причина не указана",
+
+  "You cannot join this Channel because you are banned.":
+  "Вы не можете присоединиться к этому каналу, так как вы заблокированы.",
+
+  "The specified Channel does not exists and Channel creation is restricted.":
+  "Указанный канал не существует, а создание каналов ограничено.",
+
+  "The specified Channel does not exists or is currently locked waiting for configuration.":
+  "Указанный канал не существует или заблокирован в ожидании настройки.",
+
+  "The Channel is temporarily unavailable because it have reached maximum number of occupants.":
+  "Канал временно недоступен, так как достигнуто максимальное количество участников.",
+
+  "You were banned from the Channel":
+  "Вы были заблокированы в канале",
+
+  "You were kicked from the Channel":
+  "Вы были выгнаны из канала",
+
+  "Rules changes caused you to leave the Channel":
+  "Изменение правил привело к вашему выходу из канала",
+
+  "Server error caused you to leave the Channel":
+  "Ошибка сервера привела к вашему выходу из канала",
+
+  "Revoke contact subscription":
+  "Отозвать подписку на контакт",
+
+  "Do you really want to remove contact and revoke subscription authorization ?":
+  "Вы действительно хотите удалить контакт и отозвать авторизацию подписки?",
+
+  "Do you really want to remove contact and abort subscription authorization request ?":
+  "Вы действительно хотите удалить контакт и отменить запрос авторизации подписки?",
+
+  "Contact subscription request":
+  "Запрос подписки на контакт",
+
+  "A new contact is requesting subscription authorization. Would you like to grant authorization and add this contact ?":
+  "Новый контакт запрашивает авторизацию подписки. Хотите предоставить авторизацию и добавить этот контакт?",
+
+  "Delete Channel bookmark":
+  "Удалить закладку канала",
+
+  "Do you really want to delete Channel bookmark ?":
+  "Вы действительно хотите удалить закладку канала?",
+
+  "Channel unregister":
+  "Отмена регистрации в канале",
+
+  "Do you really want to unregister from Channel ?":
+  "Вы действительно хотите отменить регистрацию в канале?",
+
+  "Allow":
+  "Разрешить",
+
+  "Deny":
+  "Отклонить",
+
+  "New subscription authorization request was sent":
+  "Новый запрос авторизации подписки отправлен",
+
+  "Send a message to":
+  "Отправить сообщение",
+
+  "is currently writing":
+  "сейчас печатает",
+
+  "and":
+  "и",
+
+  "other(s)":
+  "другие",
+
+  "are currently writing":
+  "сейчас печатают",
+
+  "Start of history":
+  "Начало истории",
+
+  "at":
+  "в",
+
+  "Contact address (JID)":
+  "Адрес контакта (JID)",
+
+  "Enter contact XMPP address...":
+  "Введите XMPP-адрес контакта...",
+
+  "A subscription authorization request will be sent to the specified address, you'll have to wait for contact to allow to that request.":
+  "Запрос авторизации подписки будет отправлен на указанный адрес, вам придётся дождаться одобрения контактом этого запроса.",
+
+  "Submit":
+  "Отправить",
+
+  "Configure Channel...":
+  "Настроить канал...",
+
+  "Set Channel subject...":
+  "Задать тему канала...",
+
+  "Add Channel to bookmarks ?":
+  "Добавить канал в закладки?",
+
+  "Add Bookmark":
+  "Добавить закладку",
+
+  "Channel configuration":
+  "Настройка канала",
+
+  "Channel subject":
+  "Тема канала",
+
+  "Channel information":
+  "Информация о канале",
+
+  "Access &amp; moderation":
+  "Доступ и модерация",
+
+  "Other options":
+  "Другие параметры",
+
+  "Channel title":
+  "Название канала",
+
+  "Channel description":
+  "Описание канала",
+
+  "Persistent Channel":
+  "Постоянный канал",
+
+  "Unless this option is enabled, Channel will be automatically deleted once all occupants have left it":
+  "Если этот параметр не включён, канал будет автоматически удалён, когда все участники его покинут",
+
+  "Public Channel":
+  "Публичный канал",
+
+  "A public Channel can be found by any user through normal means such as searching and service discovery":
+  "Публичный канал может быть найден любым пользователем обычными средствами, такими как поиск и обнаружение сервисов",
+
+  "Protected by password":
+  "Защищён паролем",
+
+  "Password":
+  "Пароль",
+
+  "Enter a password...":
+  "Введите пароль...",
+
+  "A password-protected Channel requires to provide a password to join it":
+  "Для входа в канал, защищённый паролем, необходимо указать пароль",
+
+  "Allowed to members only":
+  "Только для участников",
+
+  "Enable this to restrict Channel access and only allow those that have at least the Member affiliation":
+  "Включите это, чтобы ограничить доступ к каналу и разрешить вход только тем, кто имеет как минимум статус участника",
+
+  "Moderated Channel":
+  "Модерируемый канал",
+
+  "In moderated Channels, occupants must be given permission to speak by a Channel moderator":
+  "В модерируемых каналах участники должны получить разрешение на отправку сообщений от модератора канала",
+
+  "Maximum Occupants Count":
+  "Максимальное количество участников",
+
+  "Set the maximum number of occupants the Channel may accept":
+  "Задайте максимальное количество участников, которое может принять канал",
+
+  "Occupants anonymity":
+  "Анонимность участников",
+
+  "In a Non-Anonymous Channel, occupants address is exposed to others, otherwise only Moderators can view occupants address":
+  "В неанонимном канале адреса участников видны остальным, в противном случае только модераторы могут видеть адреса участников",
+
+  "Semi-Anonymous":
+  "Полуанонимный",
+
+  "Non-Anonymous":
+  "Неанонимный",
+
+  "Occupants visibility":
+  "Видимость участников",
+
+  "Set Channel occupants visibility according their assigned Role":
+  "Задайте видимость участников канала в соответствии с их назначенной ролью",
+
+  "Allow Private Messages":
+  "Разрешить личные сообщения",
+
+  "Anyone":
+  "Все",
+
+  "Participants":
+  "Участники",
+
+  "Moderators":
+  "Модераторы",
+
+  "None":
+  "Никто",
+
+  "Set Channel occupants that are allowed to send private messages according their assigned Role":
+  "Задайте, кто из участников канала может отправлять личные сообщения в соответствии с их назначенной ролью",
+
+  "History max length":
+  "Максимальная длина истории",
+
+  "Specify the maximum number of previous messages that should be sent to users when they join the Channel":
+  "Укажите максимальное количество предыдущих сообщений, которые должны отправляться пользователям при входе в канал",
+
+  "History default length":
+  "Длина истории по умолчанию",
+
+  "Specify the number of previous messages sent to new users when they join the Channel":
+  "Укажите количество предыдущих сообщений, отправляемых новым пользователям при входе в канал",
+
+  "Enable messages archiving":
+  "Включить архивирование сообщений",
+
+  "Stores messages in persistent way using Message Archive Management":
+  "Сохраняет сообщения на постоянной основе с помощью управления архивом сообщений",
+
+  "Channel administration":
+  "Администрирование канала",
+
+  "List is empty":
+  "Список пуст",
+
+  "Banned users":
+  "Заблокированные пользователи",
+
+  "Ban list":
+  "Список заблокированных",
+
+  "Banned users are not allowed to join nor register as member in the Room. You can cancel ban for an user so it can join again and register as member if server rules allow it.":
+  "Заблокированные пользователи не могут присоединяться или регистрироваться в комнате. Вы можете снять блокировку с пользователя, чтобы он мог снова войти и зарегистрироваться, если правила сервера это позволяют.",
+
+  "Occupants affiliation":
+  "Принадлежность участников",
+
+  "Members list":
+  "Список участников",
+
+  "Affiliation provides a way to specify a list of users who are allowed to enter a members-only Room, grant Administrator status or Room ownership. A non-member user can join the Room until it is not members-only.":
+  "Принадлежность позволяет задать список пользователей, которым разрешён вход в комнату только для участников, предоставить статус администратора или владельца комнаты. Пользователь без принадлежности может войти в комнату, пока она не ограничена только для участников.",
+
+  "Channel destruction":
+  "Удаление канала",
+
+  "Deletes the Channel from the group chat service. This operation cannot be undone.":
+  "Удаляет канал из сервиса групповых чатов. Это действие нельзя отменить.",
+
+  "Destroy Channel":
+  "Удалить канал",
+
+  "You can specify a reason for Channel destruction.":
+  "Вы можете указать причину удаления канала.",
+
+  "Enter reason...":
+  "Введите причину...",
+
+  "User profile":
+  "Профиль пользователя",
+
+  "Display name":
+  "Отображаемое имя",
+
+  "My Nickname":
+  "Мой никнейм",
+
+  "The nickname associated with your account to interact with other users, if none is defined, your account username is used.":
+  "Никнейм, связанный с вашим аккаунтом для взаимодействия с другими пользователями. Если не задан, используется имя пользователя вашего аккаунта.",
+
+  "Avatar image":
+  "Изображение аватара",
+
+  "Remove":
+  "Удалить",
+
+  "Change":
+  "Изменить",
+
+  "Your account's profile picture displayed to other users, if none is defined, a default image will be shown.":
+  "Изображение профиля вашего аккаунта, отображаемое другим пользователям. Если не задано, будет показано изображение по умолчанию.",
+
+  "Profile access":
+  "Доступ к профилю",
+
+  "Set access rules for your profile data, if restricted, only subscribed users can see your avatar and access profile data.":
+  "Задайте правила доступа к данным вашего профиля. При ограниченном доступе только подписанные пользователи могут видеть ваш аватар и данные профиля.",
+
+  "Profile data in open access":
+  "Данные профиля в открытом доступе",
+
+  "Account options":
+  "Настройки аккаунта",
+
+  "Account password":
+  "Пароль аккаунта",
+
+  "Current password":
+  "Текущий пароль",
+
+  "New password":
+  "Новый пароль",
+
+  "Confirm password":
+  "Подтвердите пароль",
+
+  "To change your account password, enter your current password, then specify and confirm the new password to set.":
+  "Чтобы изменить пароль аккаунта, введите текущий пароль, затем укажите и подтвердите новый пароль.",
+
+  "Change Password":
+  "Изменить пароль",
+
+  "The current password you entered is wrong":
+  "Введённый текущий пароль неверен",
+
+  "The password confirmation does not match":
+  "Подтверждение пароля не совпадает",
+
+  "Password has been changed successfully":
+  "Пароль успешно изменён",
+
+  "Password change failed":
+  "Не удалось изменить пароль",
+
+  "Account deletion":
+  "Удаление аккаунта",
+
+  "Cancel registration with current server and delete your account data permanently.":
+  "Отменить регистрацию на текущем сервере и навсегда удалить данные вашего аккаунта.",
+
+  "Delete your account":
+  "Удалить ваш аккаунт",
+
+  "Are you sure you want to delete your XMPP/Jabber account on this server ? This action cannot be reversed.":
+  "Вы уверены, что хотите удалить свой аккаунт XMPP/Jabber на этом сервере? Это действие необратимо.",
+
+  "Yes, farewell":
+  "Да, прощайте",
+
+  "God damn, NO !":
+  "Чёрт, НЕТ!",
+
+  "Uploading file":
+  "Загрузка файла",
+
+  "Upload denied":
+  "Загрузка отклонена",
+
+  "Upload failed":
+  "Загрузка не удалась",
+
+  "HTTP server unreachable":
+  "HTTP-сервер недоступен",
+
+  "Error":
+  "Ошибка",
+
+  "Unhandled error":
+  "Необработанная ошибка",
+
+  "Apply":
+  "Применить",
+
+  "Abort":
+  "Прервать",
+
+  "Close":
+  "Закрыть",
+
+  "Cancel":
+  "Отмена",
+
+  "Retry":
+  "Повторить",
+
+  "Add":
+  "Добавить",
+
+  "Input devices access":
+  "Доступ к устройствам ввода",
+
+  "Getting access to input devices failed, would you like to retry ?":
+  "Не удалось получить доступ к устройствам ввода, хотите повторить попытку?",
+
+  "Enable or disable the camera":
+  "Включить или отключить камеру",
+
+  "Mute or unmute the microphone":
+  "Включить или отключить микрофон",
+
+  "Mute or unmute sound":
+  "Включить или отключить звук",
+
+  "Volume":
+  "Громкость",
+
+  "Hang up":
+  "Завершить звонок",
+
+  "Expand/Reduce":
+  "Развернуть/Свернуть",
+
+  "Incoming call...":
+  "Входящий звонок...",
+
+  "Incoming video call...":
+  "Входящий видеозвонок...",
+
+  "Incoming audio call...":
+  "Входящий аудиозвонок...",
+
+  "The call has been declined":
+  "Звонок отклонён",
+
+  "The other party is buzy":
+  "Другая сторона занята",
+
+  "The other party hung up":
+  "Другая сторона повесила трубку",
+
+  "Network negotiation...":
+  "Согласование сети...",
+
+  "Call in progress...":
+  "Звонок в процессе...",
+
+  "You missed a call":
+  "Вы пропустили звонок",
+
+  "The other party encountered error":
+  "У другой стороны произошла ошибка",
+
+  "The other party lacks suitable devices":
+  "У другой стороны отсутствуют подходящие устройства",
+
+  "Input devices access failed":
+  "Не удалось получить доступ к устройствам ввода",
+
+  "Call failure":
+  "Ошибка звонка",
+
+  "Access to input devices is required for call session, configure your browser to allow it and try again.":
+  "Для звонка необходим доступ к устройствам ввода, настройте браузер для предоставления доступа и попробуйте снова.",
+
+  "modified":
+  "изменено",
+
+  "Edit message":
+  "Редактировать сообщение",
+
+  "Delete message":
+  "Удалить сообщение",
+
+  "Delete message ?":
+  "Удалить сообщение?",
+
+  "Reply":
+  "Ответить",
+
+  "Reply to":
+  "Ответить на",
+
+  "The message is unreachable":
+  "Сообщение недоступно",
+
+  "The message was deleted":
+  "Сообщение было удалено",
+
+  "Do you really want to disconnect current session ?":
+  "Вы действительно хотите отключить текущую сессию?",
+
+  "has left the conversation":
+  "покинул(а) беседу",
+
+  "joined the conversation":
+  "присоединился(-ась) к беседе"
+}
