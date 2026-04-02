@@ -5457,6 +5457,10 @@ function xows_cli_call_self_invite(peer, audio, video)
   // Create new (outbound) session dataset for Peer
   const sess = xows_cli_call_create(peer, XOWS_CALL_OUBD, XOWS_CALL_PEND);
 
+  // Generate session ID for JMI
+  const sid = xows_gen_nonce_asc(16);
+  sess.sid = sid;
+
   // Create new Stream object to combine audio and video tracks
   const stream = new MediaStream();
 
@@ -5469,12 +5473,33 @@ function xows_cli_call_self_invite(peer, audio, video)
       stream.addTrack(track);
   }
 
-  // Set session RPC and local stream
+  // Set session local stream (don't set on RPC yet - wait for proceed)
   sess.loc.str = stream;
 
-  // Set RTC local stream, then wait for RTC to generate a local SDP
-  // that will be passed to 'xows_cli_wrtc_onsdesc' callback
-  xows_wrtc_set_local_stream(sess.rpc, stream);
+  // Build media list for propose
+  const medias = [];
+  if(stream.getAudioTracks().length) medias.push("audio");
+  if(stream.getVideoTracks().length) medias.push("video");
+
+  // Store JMI info
+  sess.jmi = {audio: medias.includes("audio"), video: medias.includes("video")};
+
+  // Send JMI propose to peer's bare JID
+  xows_log(2,"cli_call_invite","Sending JMI propose to",peer.addr);
+  xows_xmp_jmsg_propose_send(peer.jbar, sid, medias);
+
+  // Fallback: if no JMI response (ringing/proceed) within 10s,
+  // fall back to direct session-initiate for non-JMI clients
+  setTimeout(() => {
+    if(xows_cli_call_db.has(peer)) {
+      const s = xows_cli_call_db.get(peer);
+      if(s.sid === sid && s.ste === XOWS_CALL_PEND && !s.loc.sdp) {
+        xows_log(1,"cli_call_invite","No JMI response, falling back to direct session-initiate");
+        // Initiate RTC directly
+        xows_wrtc_set_local_stream(s.rpc, s.loc.str);
+      }
+    }
+  }, 10000);
 }
 
 /**
@@ -5550,8 +5575,11 @@ function xows_cli_call_self_hangup(peer, reason)
   // Send Jingle session terminate
   if(sess.sid) {
     if(!reason) reason = "success";
-    if(sess.jmi && !sess.rmt.sdp) {
-      // JMI: no session-initiate received yet, send JMI reject message
+    if(sess.jmi && !sess.loc.sdp && sess.dir === XOWS_CALL_OUBD) {
+      // JMI outbound: no SDP created yet, retract the proposal
+      xows_xmp_jmsg_retract_send(peer.jbar, sess.sid);
+    } else if(sess.jmi && !sess.rmt.sdp && sess.dir === XOWS_CALL_INBD) {
+      // JMI inbound: no session-initiate received yet, send JMI reject
       xows_xmp_jmsg_reject_send(peer.jrpc, sess.sid);
     } else {
       xows_xmp_jing_terminate(peer.jrpc, sess.sid, reason);
@@ -5875,12 +5903,59 @@ function xows_cli_call_jmsg_onrecv(from, action, sid, medias)
       xows_cli_call_peer_hangup(peer, "success");
     } break;
 
-  case "reject":
-  case "proceed":
-  case "ringing":
-    // These are responses to outgoing proposals (xows does not send
-    // propose at this time, so nothing to do here)
-    break;
+  case "finish": {
+      // Call finished (sent by some clients after session-terminate)
+      if(!xows_cli_call_db.has(peer))
+        return;
+      const sess = xows_cli_call_db.get(peer);
+      if(sess.sid !== sid)
+        return;
+      xows_cli_call_peer_hangup(peer, "success");
+    } break;
+
+  case "proceed": {
+      // Peer accepted to proceed - now initiate the actual Jingle session
+      xows_log(2,"cli_jmsg_onrecv","proceed from",from,"sid="+sid);
+      if(!xows_cli_call_db.has(peer)) {
+        xows_log(1,"cli_jmsg_onrecv","proceed: no session for peer",peer.addr);
+        return;
+      }
+      const sess = xows_cli_call_db.get(peer);
+      xows_log(2,"cli_jmsg_onrecv","proceed: sess.sid="+sess.sid,"dir="+sess.dir,"has loc.str="+!!sess.loc.str);
+      if(sess.sid !== sid || sess.dir !== XOWS_CALL_OUBD)
+        return;
+
+      // Update peer JID to the full JID that sent proceed
+      peer.jrpc = from;
+
+      xows_log(2,"cli_jmsg_onrecv","Peer proceeded, initiating RTC for",peer.addr);
+
+      // Now set local stream on RPC to trigger SDP offer creation
+      xows_wrtc_set_local_stream(sess.rpc, sess.loc.str);
+    } break;
+
+  case "reject": {
+      // Peer rejected the proposal
+      if(!xows_cli_call_db.has(peer))
+        return;
+      const sess = xows_cli_call_db.get(peer);
+      if(sess.sid !== sid || sess.dir !== XOWS_CALL_OUBD)
+        return;
+
+      xows_log(2,"cli_jmsg_onrecv","Peer rejected proposal",peer.addr);
+      xows_cli_call_peer_hangup(peer, "decline");
+    } break;
+
+  case "ringing": {
+      // Peer is ringing
+      if(!xows_cli_call_db.has(peer))
+        return;
+      const sess = xows_cli_call_db.get(peer);
+      if(sess.sid !== sid || sess.dir !== XOWS_CALL_OUBD)
+        return;
+      // Forward ringing state to GUI
+      xows_cli_fw_callstate(peer, "ringing");
+    } break;
   }
 }
 
@@ -5918,7 +5993,19 @@ function xows_cli_wrtc_onsdesc(rpc, sdp, peer)
 
     // Send SDP offer via Jingle, then wait for remote peer Jingle
     // answer, either with session-accept or session-terminate.
-    sess.sid = xows_xmp_jing_initiate_sdp(peer.jrpc, sdp, xows_cli_call_jing_parse);
+    // Reuse existing SID (from JMI propose) if available
+    sess.sid = xows_xmp_jing_initiate_sdp(peer.jrpc, sdp, xows_cli_call_jing_parse, sess.sid);
+
+    // Set a timeout: if peer doesn't respond within 30s, terminate
+    setTimeout(() => {
+      if(xows_cli_call_db.has(peer)) {
+        const s = xows_cli_call_db.get(peer);
+        if(s.sid === sess.sid && s.ste === XOWS_CALL_PEND) {
+          xows_log(1,"cli_wrtc_onsdesc","Call timeout, no answer from",peer.addr);
+          xows_cli_call_peer_hangup(peer, "timeout");
+        }
+      }
+    }, 30000);
   }
 }
 
@@ -5945,7 +6032,10 @@ function xows_cli_wrtc_ontrack(rpc, stream, peer)
       sess.loc.pnd = true; // Prevent repeated calls from per-track ontrack events
       xows_log(2,"cli_wrtc_ontrack","JMI auto-accept for",peer.addr);
       xows_wrtc_set_local_stream(sess.rpc, sess.loc.str);
-      // Forward as answer stream (remote participant now available)
+    }
+
+    if(sess.jmi && sess.loc.pnd) {
+      // Forward each track arrival so GUI can update (audio → video)
       xows_cli_fw_callanwse(peer, stream);
     } else if(!sess.loc.pnd) {
       xows_log(2,"cli_wrtc_ontrack","Received offer stream from",peer.addr);

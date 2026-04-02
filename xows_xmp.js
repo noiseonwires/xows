@@ -1663,11 +1663,12 @@ function xows_xmp_message_recv(stanza)
     }
 
     // Check for Jingle Message Initiation (XEP-0353)
-    if(xmlns === XOWS_NS_JINGLE_MSG) {
+    if(xmlns === XOWS_NS_JINGLE_MSG || xmlns === "urn:xmpp:jingle-message:1") {
       const medias = [];
       const descs = node.querySelectorAll("description");
       for(let j = 0; j < descs.length; ++j)
         medias.push(descs[j].getAttribute("media"));
+      xows_log(2,"xmp_message_recv","JMI message:",tname,"xmlns="+xmlns,"id="+node.getAttribute("id"),"from="+from);
       xows_xmp_fw_jmsg_onrecv(from, tname, node.getAttribute("id"), medias);
       return true;
     }
@@ -5003,13 +5004,20 @@ function xows_xmp_jing_sdp2jingle(sdp)
       }
     }
 
-    // add <source> nodes
+    // add <source> nodes, grouping parameters by SSRC (XEP-0339)
     if(sdpjson.media[i].ssrc) {
       const ssrc = sdpjson.media[i].ssrc;
+      const ssrc_map = new Map();
       for(let j = 0; j < ssrc.length; ++j) {
-        // new <source> node with <parameter> into <description>
-        xows_xml_parent(description, xows_xml_node("source",{"xmlns":XOWS_NS_JINGLE_SSMA,"ssrc":ssrc[j].id},
-                                        xows_xml_node("parameter",{"name":ssrc[j].attribute,"value":ssrc[j].value})));
+        if(!ssrc_map.has(ssrc[j].id))
+          ssrc_map.set(ssrc[j].id, []);
+        ssrc_map.get(ssrc[j].id).push(ssrc[j]);
+      }
+      for(const [id, params] of ssrc_map) {
+        const source = xows_xml_node("source",{"xmlns":XOWS_NS_JINGLE_SSMA,"ssrc":id});
+        for(let j = 0; j < params.length; ++j)
+          xows_xml_parent(source, xows_xml_node("parameter",{"name":params[j].attribute,"value":params[j].value}));
+        xows_xml_parent(description, source);
       }
     }
 
@@ -5192,14 +5200,15 @@ function xows_xmp_jing_parse(stanza, onparse)
  * @parma   {string}    to          Destination JID
  * @parma   {string}    sdp         SDP offer string
  * @param   {function} [onparse]    Optional callback to receive query result
+ * @param   {string}   [sid]        Optional session ID (reuse JMI sid)
  *
  * @return  {string}    Initiated Jingle session ID
  */
-function xows_xmp_jing_initiate_sdp(to, sdp, onparse)
+function xows_xmp_jing_initiate_sdp(to, sdp, onparse, sid)
 {
   // Create <jingle> RTP session from SDP string
   const jingle = xows_xmp_jing_sdp2jingle(sdp);
-  const sid = xows_gen_nonce_asc(16); // xows_sdp_get_sid(sdp);
+  if(!sid) sid = xows_gen_nonce_asc(16);
 
   // Complete <jingle> node with proper attributes
   jingle.setAttribute("initiator",xows_xmp_bind.jful);
@@ -5304,6 +5313,34 @@ function xows_xmp_jing_error(id, to, type, condjing, condxmpp)
 /* ---------------------------------------------------------------------------
  * Jingle Message Initiation (XEP-0353) - Send functions
  * ---------------------------------------------------------------------------*/
+/**
+ * Sends a Jingle Message Initiation <propose> message.
+ *
+ * @parma   {string}    to          Destination bare JID
+ * @parma   {string}    sid         Jingle session ID
+ * @parma   {string[]}  medias      Array of media types (e.g. ["audio","video"])
+ */
+function xows_xmp_jmsg_propose_send(to, sid, medias)
+{
+  const descs = [];
+  for(let i = 0; i < medias.length; ++i)
+    descs.push(xows_xml_node("description",{"xmlns":XOWS_NS_JINGLE_RTP1,"media":medias[i]}));
+  xows_xmp_send(xows_xml_node("message",{"to":to,"type":"chat"},
+                  xows_xml_node("propose",{"xmlns":XOWS_NS_JINGLE_MSG,"id":sid}, descs)));
+}
+
+/**
+ * Sends a Jingle Message Initiation <retract> message.
+ *
+ * @parma   {string}    to          Destination bare JID
+ * @parma   {string}    sid         Jingle session ID
+ */
+function xows_xmp_jmsg_retract_send(to, sid)
+{
+  xows_xmp_send(xows_xml_node("message",{"to":to,"type":"chat"},
+                  xows_xml_node("retract",{"xmlns":XOWS_NS_JINGLE_MSG,"id":sid})));
+}
+
 /**
  * Sends a Jingle Message Initiation <proceed> message.
  *
