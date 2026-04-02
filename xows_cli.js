@@ -5182,6 +5182,7 @@ function xows_cli_call_create(peer, dir, ste)
   xows_def_readonly(session,"rpc",rpc);
   xows_def_readonly(session,"loc",{"pnd":false, "sdp": null, "str":null});
   xows_def_readonly(session,"rmt",{"pnd":false, "sdp": null, "str":null});
+  xows_def_readonly(session,"ice_queue",[]);  //< Queued ICE candidates before remote SDP
 
   Object.seal(session); //< prevet structure modification
 
@@ -5442,6 +5443,25 @@ function xows_cli_call_clear(peer)
 }
 
 /**
+ * Flush queued ICE candidates after remote description has been set.
+ *
+ * @param   {object}    peer    Peer object
+ */
+function xows_cli_call_ice_flush(peer)
+{
+  const sess = xows_cli_call_db.get(peer);
+  if(!sess || !sess.ice_queue.length)
+    return;
+
+  xows_log(2,"cli_call_ice_flush","Flushing",sess.ice_queue.length,"queued ICE candidates");
+  while(sess.ice_queue.length) {
+    const c = sess.ice_queue.shift();
+    sess.rpc.addIceCandidate(new RTCIceCandidate(c))
+      .catch((e) => xows_log(1,"cli_call_ice_flush","Failed:",e.message));
+  }
+}
+
+/**
  *
  * Offer (invite) the specified Peer for Media Call Session.
  *
@@ -5622,6 +5642,9 @@ function xows_cli_call_peer_invite(peer, from, sid, sdp)
   // Set RTC remote SDP, then wait for RTC to generate remote Stream
   // that will be passed to 'xows_cli_wrtc_ontrack' callback
   xows_wrtc_set_remote_sdp(sess.rpc, sdp);
+
+  // Flush any queued ICE candidates
+  xows_cli_call_ice_flush(peer);
 }
 
 /**
@@ -5644,6 +5667,9 @@ function xows_cli_call_peer_accept(peer, sdp)
   // Set RTC remote SDP, then wait for RTC to generate remote Stream
   // that will be passed to 'xows_cli_wrtc_ontrack' callback
   xows_wrtc_set_remote_sdp(sess.rpc, sdp);
+
+  // Flush any queued ICE candidates
+  xows_cli_call_ice_flush(peer);
 }
 
 /**
@@ -5763,6 +5789,8 @@ function xows_cli_call_jing_onrecv(from, id, sid, action, data)
         peer.jrpc = from;
         sess.rmt.sdp = data;
         xows_wrtc_set_remote_sdp(sess.rpc, data);
+        // Flush any queued ICE candidates
+        xows_cli_call_ice_flush(peer);
       } else {
         // Direct session-initiate: create new session
         xows_cli_call_peer_invite(peer, from, sid, data);
@@ -5804,11 +5832,19 @@ function xows_cli_call_jing_onrecv(from, id, sid, action, data)
   case "transport-info": {
       // Add trickle ICE candidates to RTC connection
       if(data && data.length) {
-        for(let i = 0; i < data.length; ++i) {
-          const iceCandidate = new RTCIceCandidate(data[i]);
-          sess.rpc.addIceCandidate(iceCandidate)
-            .then(() => xows_log(2,"cli_xmp_onjingle","Added ICE candidate from",from))
-            .catch((e) => xows_log(1,"cli_xmp_onjingle","Failed to add ICE candidate:",e.message));
+        if(sess.rpc.remoteDescription) {
+          // Remote description is set, add candidates directly
+          for(let i = 0; i < data.length; ++i) {
+            const iceCandidate = new RTCIceCandidate(data[i]);
+            sess.rpc.addIceCandidate(iceCandidate)
+              .then(() => xows_log(2,"cli_xmp_onjingle","Added ICE candidate from",from))
+              .catch((e) => xows_log(1,"cli_xmp_onjingle","Failed to add ICE candidate:",e.message));
+          }
+        } else {
+          // Queue candidates until remote description is set
+          xows_log(2,"cli_xmp_onjingle","Queueing ICE candidate (no remote SDP yet)");
+          for(let i = 0; i < data.length; ++i)
+            sess.ice_queue.push(data[i]);
         }
       }
     } break;

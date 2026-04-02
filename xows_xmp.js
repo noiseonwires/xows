@@ -4833,9 +4833,11 @@ function xows_xmp_jing_jingle2sdp(jingle)
         for(let k = 0; k < parameter.length; ++k) {
           const pname = parameter[k].getAttribute("name");
           const pvalue = parameter[k].getAttribute("value");
-          if(pname) {
+          if(pname && pvalue) {
             sdp += pname+"="+pvalue;
-          } else {
+          } else if(pname) {
+            sdp += pname;
+          } else if(pvalue) {
             sdp += pvalue;
           }
           if(k < (parameter.length - 1)) sdp += ";";
