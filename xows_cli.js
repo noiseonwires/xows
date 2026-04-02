@@ -5881,6 +5881,12 @@ function xows_cli_call_jmsg_onrecv(from, action, sid, medias)
     return;
   }
 
+  // Ignore messages from self (carbon copies of our own JMI)
+  if(peer.self) {
+    xows_log(2,"cli_jmsg_onrecv","ignoring self carbon copy");
+    return;
+  }
+
   switch(action)
   {
   case "propose": {
